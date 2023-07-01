@@ -1,4 +1,4 @@
-const todos = [
+export const todos = [
   {
     id: 1,
     title: 'coding in javascript',
