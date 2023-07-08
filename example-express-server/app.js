@@ -5,7 +5,7 @@ const config = require('./config');
 
 const app = express();
 
-// 로깅을 위한 미들웨어
+// 로깅을 위한 미들웨어 => 모든 routes 이전에 호출되어야 함
 const LoggerMiddleware = (req, res, next) => {
   console.log(`Logges ${req.url} ${req.method}
 	-- ${new Date()}`);
