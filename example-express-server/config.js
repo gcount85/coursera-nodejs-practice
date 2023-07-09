@@ -1,3 +1,5 @@
-const PORT = 8080;
+const config = {
+  PORT: process.env.PORT || 3000,
+};
 
-module.exports.PORT = PORT;
+module.exports = config;
