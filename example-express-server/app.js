@@ -16,6 +16,14 @@ const LoggerMiddleware = (req, res, next) => {
 app.use(LoggerMiddleware); // app.use(미들웨어이름) : 미들웨어를 로드하기 위해 필요
 app.use(express.json()); // 요청을 JSON으로 파싱하는 내장 미들웨어(body-parser 기반)
 
+// userId를 int로 변환하는 미들웨어 (옵션)
+app.use((req, res, next) => {
+  if (req.params.userId) {
+    req.params.userId = parseInt(req.params.userId);
+  }
+  next();
+});
+
 app.get('/', (req, res) => {
   res.send('hello world');
 });
@@ -24,6 +32,7 @@ app.post('/', (req, res) => {
   res.send('POST request will get called');
 });
 
+// users route 담당
 app.use('/api/v1/users', userRouter);
 
 // 미들웨어 예시

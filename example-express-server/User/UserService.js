@@ -6,4 +6,8 @@ const getUsers = (done) => {
   userDAO.getUsers(done);
 };
 
-module.exports = { getUsers };
+const getUserById = (userId, done) => {
+  userDAO.getUserById(userId, done);
+};
+
+module.exports = { getUsers, getUserById };

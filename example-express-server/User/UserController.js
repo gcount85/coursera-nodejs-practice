@@ -6,4 +6,8 @@ const getUsers = (done) => {
   userService.getUsers(done);
 };
 
-module.exports = { getUsers };
+const getUserById = (userId, done) => {
+  userService.getUserById(userId, done);
+};
+
+module.exports = { getUsers, getUserById };

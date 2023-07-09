@@ -19,4 +19,20 @@ routes.get('/', (req, res) => {
   }
 });
 
+/* id로 유저 데이터를 가져오는 라우트 */
+routes.get('/:userId', (req, res) => {
+  try {
+    const userId = parseInt(req.params.userId);
+    userController.getUserById(userId, (err, result) => {
+      if (err) {
+        return res.status(400).send(err);
+      }
+      return res.status(200).send({ status: 'OK', data: result });
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send('Try after sometime');
+  }
+});
+
 module.exports = routes;

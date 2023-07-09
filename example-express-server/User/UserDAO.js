@@ -18,4 +18,21 @@ const getUsers = (done) => {
   });
 };
 
-module.exports = { getUsers };
+const getUserById = (userId, done) => {
+  fs.readFile('User/Users.json', (err, fileContent) => {
+    if (err) {
+      console.log(err);
+      return done('Encounterd error while getting user details by its id');
+    }
+
+    let fetchedUser = JSON.parse(fileContent).find(
+      (u, i) => u.userId === userId
+    );
+    if (fetchedUser === undefined) {
+      return done('No user found for requested userId');
+    }
+    return done(undefined, fetchedUser);
+  });
+};
+
+module.exports = { getUsers, getUserById };
