@@ -17,6 +17,7 @@ const saveProductDetails = function (productDetails, done) {
 
 const deleteProductById = (productId, done) => {
   //call dao deleteProductById method and pass the parameter
+  productDao.deleteProductById(productId, done);
 };
 
 module.exports = {

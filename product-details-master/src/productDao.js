@@ -50,6 +50,7 @@ const saveProductDetails = function (ProductDetails, done) {
       return done('an error ocurred', err);
     }
     const productData = JSON.parse(fileContent);
+    productData.push(ProductDetails);
     fs.writeFile('src/products.json', JSON.stringify(productData), (err) => {
       if (err) {
         console.log(err);
@@ -66,6 +67,25 @@ const saveProductDetails = function (ProductDetails, done) {
 const deleteProductById = function (productId, done) {
   //Write all the logical steps
   //return the callback with first parameter as undefined and second parameter as productDetails
+  fs.readFile('src/products.json', (err, fileContent) => {
+    if (err) {
+      console.log(err);
+      return done('an error ocurred', err);
+    }
+    const productData = JSON.parse(fileContent);
+    const productIdx = productData.findIndex((p) => p.id === productId);
+    if (productIdx === -1) {
+      return done("can't find", err);
+    }
+    productData.splice(productIdx, 1);
+    fs.writeFile('src/products.json', JSON.stringify(productData), (err) => {
+      if (err) {
+        console.log(err);
+        return done('Encounterd error while deleting product details');
+      }
+      return done(undefined, productId);
+    });
+  });
 };
 
 module.exports = {

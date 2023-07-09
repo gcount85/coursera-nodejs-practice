@@ -18,6 +18,7 @@ const saveProductDetails = (productDetails, done) => {
 
 const deleteProductById = (productId, done) => {
   //call service deleteProductById method and pass the parameter
+  productsService.deleteProductById(productId, done);
 };
 
 module.exports = {
