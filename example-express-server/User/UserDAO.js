@@ -7,8 +7,9 @@ json 파일을 읽고 데이터 불러오기
 
 */
 const getUsers = (done) => {
-  fs.readFile('./users.json', (err, fileContent) => {
+  fs.readFile('User/Users.json', (err, fileContent) => {
     if (err) {
+      console.log(err);
       return done('Encountered error while getting users details');
     }
 
