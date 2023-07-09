@@ -1,0 +1,159 @@
+openapi: 3.1.0
+info:
+  title: A movie API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api/v1
+paths:
+  /movies:
+    get:
+      tags:
+        - All Movies
+      summary: Retrieve all movies
+      security: []
+      responses:
+        '200':
+          description: Successfully fetched all movies details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - A New movie
+      summary: Create a new movie
+      security: []
+      responses:
+        '201':
+          description: Successfully created a new movie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '500':
+          description: Internal server error
+      parameters:
+        - in: body
+          name: body
+          description: data of a new movie
+          required: true
+          schema:
+            type: string
+  /movies/{movieId}:
+    get:
+      tags:
+        - A Specific movie
+      summary: Retrieve a specific movie by its id
+      security: []
+      responses:
+        '200':
+          description: Successfully fetched the movie detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+      parameters:
+        - in: path
+          name: movieId
+          description: ID of movie to return
+          required: true
+          schema:
+            type: integer
+    patch:
+      tags:
+        - A Specific movie
+      summary: Update a specific movie by its id
+      security: []
+      parameters:
+        - in: path
+          name: movieId
+          description: ID of movie to update
+          required: true
+          schema:
+            type: integer
+        - in: body
+          name: movieDetail
+          description: Detail of movie to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+      responses:
+        '200':
+          description: Successfully operated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+        - A Specific movie
+      summary: Delete a specific movie by its id
+      security: []
+      parameters:
+        - in: path
+          name: movieId
+          description: ID of movie to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully operated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Movie:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        movieName:
+          type: string
+          example: The Guard
+        director:
+          type: string
+          example: John Michael McDonagh
+        rating:
+          type: string
+          example: 9.4
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          type: object
