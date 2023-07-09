@@ -1,29 +1,25 @@
-
-
 //import the DAO layer
+const productDao = require('./productDao');
 
-
-const getProducts = function(done){
+const getProducts = function (done) {
   //call dao getproducts method and pass the parameter
-  
-}
+  productDao.getProducts(done);
+};
 
-const getProductById = function(id, done){
+const getProductById = function (id, done) {
   //call dao getProductById method and pass the parameter
- 
-}
-const saveProductDetails = function(productDetails, done){
+};
+const saveProductDetails = function (productDetails, done) {
   //call dao saveProductDetails method and pass the parameter
-
-}
-
+};
 
 const deleteProductById = (productId, done) => {
-//call dao deleteProductById method and pass the parameter
-}
-
-
+  //call dao deleteProductById method and pass the parameter
+};
 
 module.exports = {
-  getProducts, getProductById,saveProductDetails, deleteProductById
-}
+  getProducts,
+  getProductById,
+  saveProductDetails,
+  deleteProductById,
+};
