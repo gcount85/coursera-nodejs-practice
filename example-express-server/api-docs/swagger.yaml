@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  title: A user api
+  description: USER API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+tags:
+  - name: USER Details
+    description: Display details of users
+paths:
+  /users:
+    get:
+      tags:
+        - All Users
+      summary: Retrieve all users
+      security: []
+      responses:
+        '200':
+          description: Successfully fetched all users details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - A New User
+      summary: Create a new user
+      security: []
+      responses:
+        '201':
+          description: Successfully created a new user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '500':
+          description: Internal server error
+      parameters:
+        - in: body
+          name: body
+          description: data of a new user
+          required: true
+          schema:
+            type: string
+  /users/{userId}:
+    get:
+      tags:
+        - A Specific User
+      summary: Retrieve a specific user by its id
+      security: []
+      responses:
+        '200':
+          description: Successfully fetched the user detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+      parameters:
+        - in: path
+          name: userId
+          description: ID of user to return
+          required: true
+          schema:
+            type: integer
+    put:
+      tags:
+        - A Specific User
+      summary: Update a specific user by its id
+      security: []
+      parameters:
+        - in: path
+          name: userId
+          description: ID of user to update
+          required: true
+          schema:
+            type: integer
+        - in: body
+          name: userName
+          description: Name of user to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successfully operated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+          example: 101
+        userName:
+          type: string
+          example: James
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          type: object

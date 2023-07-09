@@ -6,6 +6,11 @@ const config = require('./config');
 const app = express();
 const userRouter = require('./User/UserRouter');
 
+/* for swagger */
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDoc = YAML.load('./api-docs/swagger.yaml');
+
 // 로깅을 위한 미들웨어 => 모든 routes 이전에 호출되어야 함
 const LoggerMiddleware = (req, res, next) => {
   console.log(`Logged ${req.url} ${req.method}
@@ -32,6 +37,9 @@ app.all('/secret', (req, res, next) => {
   console.log('Accessing the secret section...');
   next(); // next handler를 호출함
 });
+
+// swagger route
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
 // 에러 핸들링을 위한 미들웨어 (특정 URI가 존재하지 않을 때) => 모든 route 호출 다음에 동작
 app.use((req, res, next) => {
