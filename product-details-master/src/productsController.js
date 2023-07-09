@@ -8,6 +8,7 @@ const getProducts = (done) => {
 
 const getProductById = (productId, done) => {
   //call service getProductById method and pass the parameter
+  productsService.getProductById(productId, done);
 };
 
 const saveProductDetails = (productDetails, done) => {

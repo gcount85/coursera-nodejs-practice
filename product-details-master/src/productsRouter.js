@@ -34,13 +34,21 @@ router.get('/', (req, res) => {
 router.get('/:productId', intProductId, (req, res) => {
   try {
     //get the productid from the req.params
-
+    const { productId } = req.params;
     //calling the controller getProductById method
     //if error return the response as 400
     //if result return the response as 200 with status as OK and  data as result
-    productsController.getProductById(productId, (err, results) => {});
+    productsController.getProductById(productId, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).send('error while fetching product');
+      }
+      return res.status(200).send({ STATUS: 'OK', data: results });
+    });
   } catch (err) {
     //Handle the exception return response as 400 with status as some error msg
+    console.log(err);
+    return res.status(400).send('error while fetching product');
   }
 });
 

@@ -19,9 +19,21 @@ const getProducts = function (done) {
 
 //The function getProductById will take two parameters first the id and second the callback
 //It will read the product.json file
-const getProductById = function (id, done) {
+const getProductById = function (productId, done) {
   //write all the logical steps
   //return the callback with first parameter as undefined and second parameter as productDetails
+  fs.readFile('src/products.json', (err, fileContent) => {
+    if (err) {
+      console.log(err);
+      return done('an error ocurred', err);
+    }
+    const productData = JSON.parse(fileContent);
+    const product = productData.find((p) => p.id === productId);
+    if (!product) {
+      return done("can't find", err);
+    }
+    return done(undefined, product);
+  });
 };
 
 //The saveProductDetails method will take productDetails and done as callback

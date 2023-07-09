@@ -6,8 +6,9 @@ const getProducts = function (done) {
   productDao.getProducts(done);
 };
 
-const getProductById = function (id, done) {
+const getProductById = function (productId, done) {
   //call dao getProductById method and pass the parameter
+  productDao.getProductById(productId, done);
 };
 const saveProductDetails = function (productDetails, done) {
   //call dao saveProductDetails method and pass the parameter
