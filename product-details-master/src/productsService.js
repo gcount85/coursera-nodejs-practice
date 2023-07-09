@@ -12,6 +12,7 @@ const getProductById = function (productId, done) {
 };
 const saveProductDetails = function (productDetails, done) {
   //call dao saveProductDetails method and pass the parameter
+  productDao.saveProductDetails(productDetails, done);
 };
 
 const deleteProductById = (productId, done) => {

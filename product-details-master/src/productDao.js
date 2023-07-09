@@ -44,6 +44,20 @@ const saveProductDetails = function (ProductDetails, done) {
   //push the productDetails in the productData
   //Write the productData into the file
   //return the callback with undefined and ProductDetails
+  fs.readFile('src/products.json', (err, fileContent) => {
+    if (err) {
+      console.log(err);
+      return done('an error ocurred', err);
+    }
+    const productData = JSON.parse(fileContent);
+    fs.writeFile('src/products.json', JSON.stringify(productData), (err) => {
+      if (err) {
+        console.log(err);
+        return done('Encounterd error while saving product details');
+      }
+      return done(undefined, ProductDetails);
+    });
+  });
 };
 
 //The method deleteProductById will take productId and done as parameters

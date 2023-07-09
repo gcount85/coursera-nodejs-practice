@@ -13,6 +13,7 @@ const getProductById = (productId, done) => {
 
 const saveProductDetails = (productDetails, done) => {
   //call service saveProductDetails method and pass the parameter
+  productsService.saveProductDetails(productDetails, done);
 };
 
 const deleteProductById = (productId, done) => {

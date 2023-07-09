@@ -56,13 +56,22 @@ router.get('/:productId', intProductId, (req, res) => {
 router.post('/', (req, res) => {
   try {
     //get all the productdetails from the req.body
-    const productDetails = {};
+    const productDetails = req.body;
+    console.log(productDetails);
     //calling the controller saveProductDetails method
     //if error return the response as 400
     //if result return the response as 201 with status as OK and  data as result
-    productsController.saveProductDetails(productDetails, (err, results) => {});
+    productsController.saveProductDetails(productDetails, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).send('error while saving product');
+      }
+      return res.status(201).send({ STATUS: 'OK', data: results });
+    });
   } catch (err) {
     //Handle the exception return response as 400 with status as some error msg
+    console.log(err);
+    return res.status(400).send('error while fetching product');
   }
 });
 
