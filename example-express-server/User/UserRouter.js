@@ -5,6 +5,15 @@ const routes = express.Router();
 
 const userController = require('./UserController');
 
+// userId를 int로 변환하는 미들웨어
+const intUserId = (req, res, next) => {
+  console.log(req.params);
+  if (req.params.userId) {
+    req.params.userId = parseInt(req.params.userId);
+  }
+  next();
+};
+
 /* 유저 데이터를 가져오는 라우트 */
 routes.get('/', (req, res) => {
   try {
@@ -15,14 +24,14 @@ routes.get('/', (req, res) => {
       return res.status(200).send({ status: 'OK', data: result });
     });
   } catch (err) {
-    return res.status(500).send('Try after sometime');
+    return res.status(500).send('Try after sometime', err);
   }
 });
 
 /* id로 유저 데이터를 가져오는 라우트 */
-routes.get('/:userId', (req, res) => {
+routes.get('/:userId', intUserId, (req, res) => {
   try {
-    const userId = parseInt(req.params.userId);
+    const userId = req.params.userId;
     userController.getUserById(userId, (err, result) => {
       if (err) {
         return res.status(400).send(err);
@@ -31,7 +40,24 @@ routes.get('/:userId', (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).send('Try after sometime');
+    return res.status(500).send('Try after sometime', err);
+  }
+});
+
+/* id로 유저 데이터(유저 이름)를 변경하는 라우트 */
+routes.put('/:userId', intUserId, (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { userName } = req.body;
+    userController.updateUserById(userId, userName, (err, result) => {
+      if (err) {
+        return res.status(400).send(err);
+      }
+      return res.status(200).send({ status: 'OK', data: result });
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send('Try after sometime', err);
   }
 });
 

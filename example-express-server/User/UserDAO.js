@@ -25,9 +25,8 @@ const getUserById = (userId, done) => {
       return done('Encounterd error while getting user details by its id');
     }
 
-    let fetchedUser = JSON.parse(fileContent).find(
-      (u, i) => u.userId === userId
-    );
+    let userData = JSON.parse(fileContent);
+    let fetchedUser = userData.find((u, i) => u.userId === userId);
     if (fetchedUser === undefined) {
       return done('No user found for requested userId');
     }
@@ -35,4 +34,26 @@ const getUserById = (userId, done) => {
   });
 };
 
-module.exports = { getUsers, getUserById };
+const updateUserById = (userId, userName, done) => {
+  fs.readFile('User/Users.json', (err, fileContent) => {
+    if (err) {
+      console.log(err);
+      return done('Encounterd error while getting user details by its id');
+    }
+
+    let userData = JSON.parse(fileContent);
+    let userIdx = userData.findIndex((u, i) => u.userId === userId);
+    if (userIdx == -1) {
+      return done('No user found for requested userId');
+    }
+    userData[userIdx].userName = userName;
+    fs.writeFile('User/Users.json', JSON.stringify(userData), (err) => {
+      if (err) {
+        return done('Encounterd error while getting user details by its id');
+      }
+      return done(undefined, 'successfully updated user details');
+    });
+  });
+};
+
+module.exports = { getUsers, getUserById, updateUserById };

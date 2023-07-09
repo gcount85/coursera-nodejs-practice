@@ -1,22 +1,7 @@
 [
-  {
-    "userId": 101,
-    "userName": "John"
-  },
-  {
-    "userId": 102,
-    "userName": "Barry"
-  },
-  {
-    "userId": 103,
-    "userName": "Jenny"
-  },
-  {
-    "userId": 104,
-    "userName": "William"
-  },
-  {
-    "userId": 105,
-    "userName": "Jane"
-  }
+  { "userId": 101, "userName": "Clara" },
+  { "userId": 102, "userName": "Barry" },
+  { "userId": 103, "userName": "Jenny" },
+  { "userId": 104, "userName": "William" },
+  { "userId": 105, "userName": "Jane" }
 ]
