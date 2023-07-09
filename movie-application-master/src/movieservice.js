@@ -51,8 +51,14 @@ const updateMovieDetails = async (movieId, movieDetails, done) => {
 };
 
 //This method will delete specific movie from Json Server
-const deleteMovieById = (movieId, done) => {
+const deleteMovieById = async (movieId, done) => {
   //This url can be used -  axios.delete(`http://localhost:3000/movies/${movieId}`)
+  try {
+    const res = await axios.delete(`http://localhost:3000/movies/${movieId}`);
+    return done(undefined, res.data);
+  } catch (err) {
+    return done('err while updating a movie', err);
+  }
 };
 
 module.exports = {

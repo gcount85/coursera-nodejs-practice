@@ -23,6 +23,7 @@ const updateMovieDetails = (movieId, movieDetails, done) => {
 
 const deleteMovieById = (movieId, done) => {
   //call service method deleteMovieById method
+  movieService.deleteMovieById(movieId, done);
 };
 
 module.exports = {

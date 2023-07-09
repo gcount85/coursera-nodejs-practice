@@ -92,13 +92,13 @@ router.patch('/:movieId', intMovieId, (req, res) => {
       movieDetails,
       (err, results) => {
         if (err) {
-          return res.status(400).send('error while updating a movie');
+          return res.status(400).send('error while patching a movie');
         }
         return res.status(200).send({ STATUS: 'OK', data: results });
       }
     );
   } catch (err) {
-    return res.status(400).send('error while updating a movie');
+    return res.status(400).send('error while patching a movie');
   }
 });
 
@@ -109,11 +109,19 @@ router.patch('/:movieId', intMovieId, (req, res) => {
 router.delete('/:movieId', intMovieId, (req, res) => {
   try {
     //retreive moviedId from req.params
+    const { movieId } = req.params;
 
     //calling controller method and passing the parameters
     //return the response as per error or result coming from controller
-    movieController.deleteMovieById(movieId, (err, results) => {});
-  } catch (err) {}
+    movieController.deleteMovieById(movieId, (err, results) => {
+      if (err) {
+        return res.status(400).send('error while deleting a movie');
+      }
+      return res.status(200).send({ STATUS: 'OK', data: results });
+    });
+  } catch (err) {
+    return res.status(400).send('error while deleting a movie');
+  }
 });
 
 module.exports = router;
