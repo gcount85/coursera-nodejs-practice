@@ -82,17 +82,24 @@ router.post('/', (req, res) => {
 router.patch('/:movieId', intMovieId, (req, res) => {
   try {
     //retreive moviedId from req.params
-
+    const { movieId } = req.params;
     //retreive movieDetails from req.body
-    const movieDetails = {};
+    const movieDetails = req.body;
     //calling controller method and passing the parameters
     //return the response as per error or result coming from controller
     movieController.updateMovieDetails(
       movieId,
       movieDetails,
-      (err, results) => {}
+      (err, results) => {
+        if (err) {
+          return res.status(400).send('error while updating a movie');
+        }
+        return res.status(200).send({ STATUS: 'OK', data: results });
+      }
     );
-  } catch (err) {}
+  } catch (err) {
+    return res.status(400).send('error while updating a movie');
+  }
 });
 
 /**

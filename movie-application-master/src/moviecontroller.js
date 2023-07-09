@@ -18,6 +18,7 @@ const saveMovieDetails = (movieDetails, done) => {
 
 const updateMovieDetails = (movieId, movieDetails, done) => {
   //call service method updateMovieDetails method
+  movieService.updateMovieDetails(movieId, movieDetails, done);
 };
 
 const deleteMovieById = (movieId, done) => {

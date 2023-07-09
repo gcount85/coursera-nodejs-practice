@@ -37,8 +37,17 @@ const saveMovieDetails = async (movieDetails, done) => {
 };
 
 //This method will update MovieDetails in Json Server
-const updateMovieDetails = (movieId, movieDetails, done) => {
+const updateMovieDetails = async (movieId, movieDetails, done) => {
   //This url can be used - axios.patch(`http://localhost:3000/movies/${movieId}`, movieDetails)
+  try {
+    const res = await axios.patch(
+      `http://localhost:3000/movies/${movieId}`,
+      movieDetails
+    );
+    return done(undefined, res.data);
+  } catch (err) {
+    return done('err while updating a movie', err);
+  }
 };
 
 //This method will delete specific movie from Json Server
