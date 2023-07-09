@@ -1,7 +1,9 @@
 //import service layer
+const movieService = require('./movieservice');
 
 const getMovies = (done) => {
   //call service method getMovies method
+  movieService.getMovies(done);
 };
 
 const getMovieById = (movieId, done) => {

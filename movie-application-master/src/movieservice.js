@@ -1,11 +1,18 @@
 //import axios module
+const axios = require('axios');
 
 //After starting the JSOn server check the port on which is running accordingly change
 //the port in url given below
 
 //This method will get all movies from json server
-const getMovies = (done) => {
+const getMovies = async (done) => {
   // This url can be used - axios.get("http://localhost:3000/movies")
+  try {
+    const res = await axios.get('http://localhost:3000/movies');
+    return done(undefined, res.data);
+  } catch (err) {
+    return done('err while fetching all movies', err);
+  }
 };
 
 //This method will get specific movie id from json server
