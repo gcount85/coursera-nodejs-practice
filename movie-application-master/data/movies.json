@@ -41,6 +41,12 @@
       "director": "Franklin",
       "rating": "10",
       "id": 7
+    },
+    {
+      "movieName": "인생 열심히 살자 ",
+      "director": "이은민",
+      "rating": "10",
+      "id": 8
     }
   ]
 }

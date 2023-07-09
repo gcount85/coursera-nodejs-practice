@@ -26,8 +26,14 @@ const getMovieById = async (movieId, done) => {
   }
 };
 //This method will save Movie details in Json server
-const saveMovieDetails = (movieDetails, done) => {
+const saveMovieDetails = async (movieDetails, done) => {
   //This url can be used  -  axios.post(`http://localhost:3000/movies`, movieDetails)
+  try {
+    const res = await axios.post(`http://localhost:3000/movies`, movieDetails);
+    return done(undefined, res.data);
+  } catch (err) {
+    return done('err while saving a movie', err);
+  }
 };
 
 //This method will update MovieDetails in Json Server

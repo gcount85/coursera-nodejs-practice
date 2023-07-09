@@ -13,6 +13,7 @@ const getMovieById = (movieId, done) => {
 
 const saveMovieDetails = (movieDetails, done) => {
   //call service method saveMovieDetails method
+  movieService.saveMovieDetails(movieDetails, done);
 };
 
 const updateMovieDetails = (movieId, movieDetails, done) => {
