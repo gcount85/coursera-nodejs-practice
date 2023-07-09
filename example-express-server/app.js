@@ -4,7 +4,7 @@ const express = require('express');
 const config = require('./config');
 
 const app = express();
-const usersRouter = require('./users/users_router');
+const usersRouter = require('./User/users_router');
 
 // 로깅을 위한 미들웨어 => 모든 routes 이전에 호출되어야 함
 const LoggerMiddleware = (req, res, next) => {
