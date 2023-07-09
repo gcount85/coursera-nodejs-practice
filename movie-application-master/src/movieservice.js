@@ -16,8 +16,14 @@ const getMovies = async (done) => {
 };
 
 //This method will get specific movie id from json server
-const getMovieById = (movieId, done) => {
+const getMovieById = async (movieId, done) => {
   // This url can be used- axios.get(`http://localhost:3000/movies/${movieId}`)
+  try {
+    const res = await axios.get(`http://localhost:3000/movies/${movieId}`);
+    return done(undefined, res.data);
+  } catch (err) {
+    return done('err while fetching a movie', err);
+  }
 };
 //This method will save Movie details in Json server
 const saveMovieDetails = (movieDetails, done) => {

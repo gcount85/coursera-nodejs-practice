@@ -31,6 +31,7 @@ router.get('/', (req, res) => {
     return res.status(400).send('error while fetching all movies');
   }
 });
+
 /**
  * API to get the details of specific movie
  * EFFECTIVE URL: GET /api/v1/movie/:movieId
@@ -39,11 +40,18 @@ router.get('/', (req, res) => {
 router.get('/:movieId', intMovieId, (req, res) => {
   try {
     //retreive moviedId from req.params
-
+    const { movieId } = req.params;
     //calling controller method and passing the parameters
     //return the response as per error or result coming from controller
-    movieController.getMovieById(movieId, (err, results) => {});
-  } catch (err) {}
+    movieController.getMovieById(movieId, (err, results) => {
+      if (err) {
+        return res.status(400).send('error while fetching a movie');
+      }
+      return res.status(200).send({ STATUS: 'OK', data: results });
+    });
+  } catch (err) {
+    return res.status(400).send('error while fetching a movie');
+  }
 });
 
 /**

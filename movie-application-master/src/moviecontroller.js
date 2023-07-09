@@ -8,6 +8,7 @@ const getMovies = (done) => {
 
 const getMovieById = (movieId, done) => {
   //call service method getMovieById method
+  movieService.getMovieById(movieId, done);
 };
 
 const saveMovieDetails = (movieDetails, done) => {
