@@ -14,4 +14,8 @@ const updateUserById = (userId, userName, done) => {
   userService.updateUserById(userId, userName, done);
 };
 
-module.exports = { getUsers, getUserById, updateUserById };
+const getUserByEmail = (email, done) => {
+  userService.getUserByEmail(email, done);
+};
+
+module.exports = { getUsers, getUserById, updateUserById, getUserByEmail };

@@ -13,6 +13,7 @@ const swaggerDoc = YAML.load('./api-docs/swagger.yaml');
 
 /* for authentication */
 const authRouter = require('./authentication/authRouter');
+const verifyAuth = require('./authentication/authMiddleware');
 
 // 로깅을 위한 미들웨어 => 모든 routes 이전에 호출되어야 함
 const LoggerMiddleware = (req, res, next) => {
@@ -34,7 +35,7 @@ app.post('/', (req, res) => {
 });
 
 // users route 담당
-app.use('/api/v1/users', userRouter);
+app.use('/api/v1/users', verifyAuth.verifyToken, userRouter); // Authentication 미들웨어 추가
 
 // 미들웨어 예시
 app.all('/secret', (req, res, next) => {

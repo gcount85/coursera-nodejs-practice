@@ -14,6 +14,27 @@ const intUserId = (req, res, next) => {
   next();
 };
 
+/* JWT를 decoded한 값을 통해 로그인한 유저 정보 반환 */
+routes.get('/me', (req, res) => {
+  try {
+    const userData = req.claims;
+    console.log(userData);
+
+    if (!userData.email) {
+      return res.status(400).send('user email not available');
+    }
+    userController.getUserByEmail(userData.email, (err, result) => {
+      if (err) {
+        return res.status(400).send('error getting the user by email');
+      }
+      return res.status(200).send({ status: 'OK', data: result });
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send('unexpected error. Try after sometime');
+  }
+});
+
 /* 유저 데이터를 가져오는 라우트 */
 routes.get('/', (req, res) => {
   try {
