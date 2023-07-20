@@ -1,7 +1,32 @@
 [
-  { "userId": 101, "userName": "Clara" },
-  { "userId": 102, "userName": "Barry" },
-  { "userId": 103, "userName": "Jenny" },
-  { "userId": 104, "userName": "William" },
-  { "userId": 105, "userName": "Jane" }
+  {
+    "userId": 101,
+    "userName": "Clara",
+    "email": "harrat@sdjfk.com",
+    "password": "ha1123"
+  },
+  {
+    "userId": 102,
+    "userName": "Barry",
+    "email": "name@gggggg.com",
+    "password": "ha2341123"
+  },
+  {
+    "userId": 103,
+    "userName": "Jenny",
+    "email": "love@gggggg.com",
+    "password": "ha23sdf"
+  },
+  {
+    "userId": 104,
+    "userName": "William",
+    "email": "cool@gggggg.com",
+    "pcssword": "sdf123"
+  },
+  {
+    "userId": 105,
+    "userName": "Jane",
+    "email": "hot@gggggg.com",
+    "password": "hsdfsf3"
+  }
 ]
