@@ -23,7 +23,29 @@ router.post('/register', (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    return res.status(400).send({ error: 'error while registering a user' });
+    return res.status(500).send({ error: 'error while registering a user' });
+  }
+});
+
+router.post('/login', (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!(email && password)) {
+      return res.status(400).send('required inputs are missing');
+    }
+
+    const userLoginDetails = { email, password };
+
+    authController.loginUser(userLoginDetails, (err, result) => {
+      if (err) {
+        return res.status(401).send({ error: 'invaild credentials' });
+      } else {
+        return res.status(200).send(result);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ error: 'error while logging-in' });
   }
 });
 
