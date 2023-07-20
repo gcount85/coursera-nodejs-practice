@@ -5,7 +5,7 @@ const authController = require('./authController');
 router.post('/register', (req, res) => {
   try {
     const { userName, email, password } = req.body;
-    if (!(userName, email, password)) {
+    if (!(userName && email && password)) {
       return res.status(400).send('required inputs are missing');
     }
     const userDetails = {
@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
       password,
     };
 
-    authController.register(userDetails, (err, result) => {
+    authController.registerUser(userDetails, (err, result) => {
       if (err) {
         return res.status(400).send({ error: 'User already exists' });
       } else {

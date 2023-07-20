@@ -64,7 +64,7 @@ const updateUserById = (userId, userName, done) => {
 
 const registerUser = (userData, done) => {
   users.push(userData);
-  fs.writeFile('User/Users.json', JSON.stringify(userData), (err) => {
+  fs.writeFile('User/Users.json', JSON.stringify(users), (err) => {
     if (err) {
       return done('Encounterd error while registering user');
     }

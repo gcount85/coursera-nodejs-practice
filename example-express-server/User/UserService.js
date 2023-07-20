@@ -14,4 +14,18 @@ const updateUserById = (userId, userName, done) => {
   userDAO.updateUserById(userId, userName, done);
 };
 
-module.exports = { getUsers, getUserById, updateUserById };
+const getUserByEmail = (email, done) => {
+  userDAO.getUserByEmail(email, done);
+};
+
+const registerUser = (userData, done) => {
+  userDAO.registerUser(userData, done);
+};
+
+module.exports = {
+  getUsers,
+  getUserById,
+  updateUserById,
+  getUserByEmail,
+  registerUser,
+};
