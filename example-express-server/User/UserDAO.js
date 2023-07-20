@@ -1,5 +1,6 @@
 // 데이터에 대한 모든 연산 (Data Access Object)
 
+const users = require('./users.json');
 const fs = require('fs');
 
 /* 
@@ -34,6 +35,11 @@ const getUserById = (userId, done) => {
   });
 };
 
+const getUserByEmail = (email, done) => {
+  const userFetched = users.filter((u) => u.email === email)[0];
+  return done(undefined, userFetched);
+};
+
 const updateUserById = (userId, userName, done) => {
   fs.readFile('User/Users.json', (err, fileContent) => {
     if (err) {
@@ -56,4 +62,20 @@ const updateUserById = (userId, userName, done) => {
   });
 };
 
-module.exports = { getUsers, getUserById, updateUserById };
+const registerUser = (userData, done) => {
+  users.push(userData);
+  fs.writeFile('User/Users.json', JSON.stringify(userData), (err) => {
+    if (err) {
+      return done('Encounterd error while registering user');
+    }
+    return done(undefined, 'successfully registered user');
+  });
+};
+
+module.exports = {
+  getUsers,
+  getUserById,
+  updateUserById,
+  getUserByEmail,
+  registerUser,
+};
