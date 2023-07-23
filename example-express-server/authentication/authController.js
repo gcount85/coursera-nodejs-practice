@@ -31,7 +31,18 @@ function loginUser(userLoginDetails, done) {
   });
 }
 
+function oauthProcessor(code, done) {
+  authService.getGITHUBAccessToken(code, (err, token) => {
+    if (err) {
+      console.log(err);
+      return done(err);
+    }
+    return done(undefined, token);
+  });
+}
+
 module.exports = {
   registerUser,
   loginUser,
+  oauthProcessor,
 };

@@ -1,7 +1,7 @@
 /* basic express server config */
-
 const express = require('express');
 const config = require('./config');
+const path = require('path');
 
 const app = express();
 const userRouter = require('./User/UserRouter');
@@ -24,10 +24,11 @@ const LoggerMiddleware = (req, res, next) => {
 
 app.use(LoggerMiddleware); // app.use(미들웨어이름) : 미들웨어를 로드하기 위해 필요
 app.use(express.json()); // 요청을 JSON으로 파싱하는 내장 미들웨어(body-parser 기반)
+app.use(express.static('static')); // static 파일 서빙하기 위한 미들웨어
 app.use('/auth', authRouter); // authentication route
 
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.sendFile(path.join(__dirname, '/static/index.html'));
 });
 
 app.post('/', (req, res) => {

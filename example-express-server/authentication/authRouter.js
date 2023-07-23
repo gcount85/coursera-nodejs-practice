@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('./authController');
+const config = require('../config');
 
 router.post('/register', (req, res) => {
   try {
@@ -46,6 +47,27 @@ router.post('/login', (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).send({ error: 'error while logging-in' });
+  }
+});
+
+router.get('/oauth/login', (req, res) => {
+  res.redirect(
+    `https://github.com/login/oauth/authorize?client_id=${config.CLIENT_ID}`
+  );
+});
+
+router.get('/oauth/callback', (req, res) => {
+  try {
+    authController.oauthProcessor(req.query.code, (err, token) => {
+      if (err) {
+        return res.status(401).send({ err: 'bad request' });
+      }
+      return res.redirect(`/welcome.html?token=${token}`);
+    });
+  } catch (err) {
+    return res
+      .status(500)
+      .send({ err: 'unexpected error during github login' });
   }
 });
 
