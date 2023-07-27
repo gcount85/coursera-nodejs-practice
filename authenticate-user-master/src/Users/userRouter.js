@@ -1,6 +1,6 @@
 //import the required module
 const express = require('express');
-const router = express.Router;
+const router = express.Router();
 const userController = require('./userController');
 
 //This get method will get the user with token

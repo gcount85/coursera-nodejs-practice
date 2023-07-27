@@ -6,11 +6,11 @@ const fs = require('fs');
 function findUser(email, done) {
   //use filter method to find the user from json file
   try {
-    const userFound = users.filter((u) => u.email === email);
+    const userFound = users.filter((u) => u.email === email)[0];
     if (!userFound) {
       return done('user not found');
     }
-    return done(undefined, userFound[0]);
+    return done(undefined, userFound);
   } catch (err) {
     return done('unexpected error while finding user');
   }
